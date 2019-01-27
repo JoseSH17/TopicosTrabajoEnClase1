@@ -1,6 +1,0 @@
-C:\Users\laboratorio\source\repos\Practicas de Clase\Bingo\Bingo\bin\Bingo.dll.config
-C:\Users\laboratorio\source\repos\Practicas de Clase\Bingo\Bingo\bin\Bingo.dll
-C:\Users\laboratorio\source\repos\Practicas de Clase\Bingo\Bingo\bin\Bingo.pdb
-C:\Users\laboratorio\source\repos\Practicas de Clase\Bingo\Bingo\obj\Debug\Bingo.csproj.CoreCompileInputs.cache
-C:\Users\laboratorio\source\repos\Practicas de Clase\Bingo\Bingo\obj\Debug\Bingo.dll
-C:\Users\laboratorio\source\repos\Practicas de Clase\Bingo\Bingo\obj\Debug\Bingo.pdb
