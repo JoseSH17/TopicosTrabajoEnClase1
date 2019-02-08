@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WcfLab1.Domain.Services.Bingo" CodeBehind="Bingo.svc.cs" %>
