@@ -8,12 +8,12 @@ using WcfLab1.Domain.Respositories;
 
 namespace WcfLab1.Domain.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IBingo" in both code and config file together.
+    // Interface tipo de juego del bingo
     public enum GameType
     {
         Full,FourCorners,H,X,O,U,P,A,E
     }
-
+   // llama a los metodos obtenernumeros para empezar a asignar numeros aleatorios entre 1 y 75 y obtiene el ganador invocando al metodo obtener ganador
     [ServiceContract]
     public interface IBingo
     {
