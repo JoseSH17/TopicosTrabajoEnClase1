@@ -10,7 +10,7 @@ namespace Lab1UnitTest
     [TestClass]
     public class BingoActionsTest
     {
-
+       // Prueba asignar cada letra de la palabra bingo 
         [TestMethod]
         public void GetBingoColumnLetterTest()
         {
@@ -30,7 +30,8 @@ namespace Lab1UnitTest
             Result = BingoAction.GetBingoColumnLetter(70);
             Assert.IsTrue(Result.Equals("I"), "Fallo O");
         }
-
+        
+ // Prueba calculo de numeros en un rango especifico 
         [TestMethod]
         public void CalculateNumber() {
             WcfLab1.Domain.Actions.Bingo BingoAction = new WcfLab1.Domain.Actions.Bingo();
@@ -50,7 +51,7 @@ namespace Lab1UnitTest
             Assert.IsTrue(num >= 61 && num <= 75, "Fallo, el numero no se encuentra en el rango esperado (61 a 75)");
         }
 
-
+            //  Prueba obtener ganador
         [TestMethod]
         public void GetWinnerPatternFull() {
             WcfLab1.Domain.Actions.Bingo BingoAction = new WcfLab1.Domain.Actions.Bingo();
