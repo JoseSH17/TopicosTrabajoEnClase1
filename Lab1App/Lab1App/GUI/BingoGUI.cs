@@ -12,6 +12,8 @@ namespace Lab1App.Presentation
 {
     public class BingoGUI : IBingoGUI
     {
+    
+    // Metodo despliegue menu para los jugadores
         #region DisplayPropmts
         public void GrettingsPropmt()
         {
@@ -22,7 +24,8 @@ namespace Lab1App.Presentation
             Console.ReadKey();
             Console.Clear();
         }
-
+   
+      // Recibe la orden cuando el usuario este listo para jugar
         public void TimeToPlayPropmt()
         {
             Console.WriteLine("");
@@ -30,6 +33,7 @@ namespace Lab1App.Presentation
             Console.ReadKey();
         }
 
+      // lee los numeros aleatorios para empezar a llenar el carton
         public void PressEnterPropmt()
         {
             Console.WriteLine("\nFor the next number, please press ENTER");
@@ -37,6 +41,7 @@ namespace Lab1App.Presentation
             Console.Clear();
         }
 
+      // Metodo para aviso de juego terminado
         public void GoodbyePropmt()
         {
             Console.WriteLine("\nThe game is over :(");
@@ -46,7 +51,7 @@ namespace Lab1App.Presentation
         #endregion
 
         #region Prepare The game
-
+        //  Obtiene los datos de los jugadores y verifica que esten la cantidad necesaria
         public string[] GetPlayersNames()
         {
             int numPlayes = 0;
@@ -73,7 +78,7 @@ namespace Lab1App.Presentation
                 Console.Clear();
             }
         }
-
+     // Metodo de despliegue de menu al usuario sobre modo de juego de Bingo
         public GameType SelectPlayMode()
         {
             while (true)
@@ -118,6 +123,7 @@ namespace Lab1App.Presentation
         }
 
         /// <summary>
+        // Imprime los cartones a los usuarios correspondientes y los muestra en pantalla
         /// </summary>
         /// <param name="player"></param>
         public void PrintCardboard(Player player)
@@ -155,6 +161,7 @@ namespace Lab1App.Presentation
 
         #region Make TheMain Task
 
+   // Muestra, el ganador del juego
         public void ShowTheWinner(string PlayerName)
         {
             Console.Clear();
@@ -163,6 +170,7 @@ namespace Lab1App.Presentation
             Console.WriteLine("======================================================");
         }
 
+       
         public void PrintPlayersAndCardboard(List<Player> PlayersList)
         {
             foreach (var player in PlayersList)
@@ -177,19 +185,21 @@ namespace Lab1App.Presentation
             Console.WriteLine("\n\n");
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="player"></param>
+        /// <resumen>
+        // Metodo que muestra en pantalla los numeros marcados en cada carton
+        /// </resumen>
+        /// <parametro1="player"></param>
         public void PrintMarkedNumbers(Player player)
         {
-            Console.WriteLine("\n{0}'s Marked Numbers List: {1}", player.Name, string.Join(",", player.MarkedNumbers));
+            Console.WriteLine("\n{0}'s Lista de numeros marcados: {1}", player.Name, string.Join(",", player.MarkedNumbers));
             Console.WriteLine("------------------------------------------------------------------");
         }
 
-        /// <summary>
+        /// <resumen>
+         // Metodo que realiza seguimiento de los numeros que salieron y que cartones contiene dichos numeros
         /// </summary>
-        /// <param name="CurrentNumber"></param>
-        /// <param name="PlayersList"></param>
+        /// <parametro1="CurrentNumber"></param>
+        /// <parametro2="PlayersList"></param>
         public void MarkNumber(int CurrentNumber, List<Player> PlayersList)
         {
             foreach (var Player in PlayersList)
@@ -211,7 +221,7 @@ namespace Lab1App.Presentation
                 }
             }
         }
-
+            // Metodo que muestra la lista de los numeros que salieron en el juego
         public void ShowNumberList(List<int> NumberList)
         {
             Console.WriteLine("List of the {0} number(s) played:", NumberList.Count);
