@@ -18,9 +18,9 @@ namespace WcfLab1.Domain.Specification
         }
 
         /// <summary>
-        /// Return a number betwen 1 - 75 and fill a list
+        /// Retorna un numero entre 1 y 75 y llena la lista
         /// </summary>
-        /// <param name="NumberList"> List of numbers to play </param>
+        /// <parametro1 ="NumberList"> Lista de numeros para jugar </param>
         /// <returns></returns>
         public int GetNumber(List<int> NumberList)
         {
