@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WcfLab1.Domain.Services;
-using WcfLab1.Domain.Respositories;
+﻿using WcfLab1.Domain.Services;
 using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Lab1App.Application;
@@ -28,7 +22,7 @@ namespace Lab1App
                 .ImplementedBy<BingoUtils>().LifestyleSingleton());
 
             var bingoApplication = container.Resolve<BingoApplication>();
-            bingoApplication.PlayBingo();
+            bingoApplication.JugarBingo();
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WcfLab1.Domain.Services;
 using WcfLab1.Domain.Respositories;
 using Lab1App.GUI;
@@ -14,109 +11,109 @@ namespace Lab1App.Presentation
     {
     
     // Metodo despliegue menu para los jugadores
-        #region DisplayPropmts
-        public void GrettingsPropmt()
+        #region MostrarMensajes
+        public void MensajesDeBienvenida()
         {
             Console.WriteLine("======================================================");
-            Console.WriteLine("    Welcome Players to the Best WCF Bingo Ever!!!");
+            Console.WriteLine("        Bienvenidos es hora de jugar Bingo!!!");
             Console.WriteLine("======================================================");
-            Console.WriteLine("               Press ENTER to CONINUE");
+            Console.WriteLine("            Presione ENTER para continuar");
             Console.ReadKey();
             Console.Clear();
         }
    
       // Recibe la orden cuando el usuario este listo para jugar
-        public void TimeToPlayPropmt()
+        public void MensajeDeInicioDeJuego()
         {
             Console.WriteLine("");
-            Console.WriteLine("Is time to play!!! (Press ENTER to START)");
+            Console.WriteLine("Hora de jugar!!! (Presione ENTER para iniciar el juego)");
             Console.ReadKey();
         }
 
       // lee los numeros aleatorios para empezar a llenar el carton
-        public void PressEnterPropmt()
+        public void MensajeSacarBolita()
         {
-            Console.WriteLine("\nFor the next number, please press ENTER");
+            Console.WriteLine("\nPresione ENTER para sacar otra bolita");
             Console.ReadKey();
             Console.Clear();
         }
 
       // Metodo para aviso de juego terminado
-        public void GoodbyePropmt()
+        public void MensajeDespedida()
         {
-            Console.WriteLine("\nThe game is over :(");
+            Console.WriteLine("\nEl juego ha terminado");
             Console.ReadKey();
         }
 
         #endregion
 
-        #region Prepare The game
+        #region Preparacion del juego
         //  Obtiene los datos de los jugadores y verifica que esten la cantidad necesaria
-        public string[] GetPlayersNames()
+        public string[] ObtenerNombresDeJugadores()
         {
-            int numPlayes = 0;
+            int cantJugadores = 0;
             while (true)
             {
-                Console.WriteLine("Write the number of players");
-                if (int.TryParse(Console.ReadLine(), out numPlayes))
+                Console.WriteLine("Por favor digite la cantidad de jugadores participantes");
+                if (int.TryParse(Console.ReadLine(), out cantJugadores))
                 {
-                    if (numPlayes > 0 && numPlayes <= 10)
+                    if (cantJugadores > 0 && cantJugadores <= 10)
                     {
-                        string[] names = new string[numPlayes];
-                        for (int i = 0; i < numPlayes; i++)
+                        string[] nombres = new string[cantJugadores];
+                        for (int i = 0; i < cantJugadores; i++)
                         {
-                            Console.WriteLine("Name of the player #{0}:", i + 1);
-                            names[i] = Console.ReadLine();
+                            Console.WriteLine("Nombre del jugador #{0}:", i + 1);
+                            nombres[i] = Console.ReadLine();
                         }
                         Console.Clear();
-                        return names;
+                        return nombres;
                     }
-                    Console.WriteLine("Only can play 1 - 10 people");
+                    Console.WriteLine("Lo sentimos, solo pueden jugar de 1 a 10 personas");
                 }
-                Console.WriteLine("Invalid selection please try again (Press enter)");
+                Console.WriteLine("Dato invalido (Presione enter para continuar)");
                 Console.ReadKey();
                 Console.Clear();
             }
         }
      // Metodo de despliegue de menu al usuario sobre modo de juego de Bingo
-        public GameType SelectPlayMode()
+        public ModoDeJuego SeleccionarModoDeJuego()
         {
             while (true)
             {
-                Console.WriteLine("Select the game mode");
-                Console.WriteLine("1) FullCardboar");
-                Console.WriteLine("2) 4 Corners");
-                Console.WriteLine("3) H");
-                Console.WriteLine("4) X");
-                Console.WriteLine("5) O");
-                Console.WriteLine("6) U");
-                Console.WriteLine("7) P");
-                Console.WriteLine("8) A");
-                Console.WriteLine("9) E");
+                Console.WriteLine("Seleccione el modo de juego");
+                Console.WriteLine("1) Carton lleno");
+                Console.WriteLine("2) 4 Esquinas");
+                Console.WriteLine("3) Formar H");
+                Console.WriteLine("4) Formar X");
+                Console.WriteLine("5) Formar O");
+                Console.WriteLine("6) Formar U");
+                Console.WriteLine("7) Formar P");
+                Console.WriteLine("8) Formar A");
+                Console.WriteLine("9) Formar E");
                 int Resp = int.Parse(Console.ReadLine());
 
                 switch (Resp)
                 {
                     case 1:
-                        return GameType.Full;
+                        return ModoDeJuego.CartonLleno;
                     case 2:
-                        return GameType.FourCorners;
+                        return ModoDeJuego.CuatroEsquinas;
                     case 3:
-                        return GameType.H;
+                        return ModoDeJuego.H;
                     case 4:
-                        return GameType.X;
+                        return ModoDeJuego.X;
                     case 5:
-                        return GameType.O;
+                        return ModoDeJuego.O;
                     case 6:
-                        return GameType.U;
+                        return ModoDeJuego.U;
                     case 7:
-                        return GameType.P;
+                        return ModoDeJuego.P;
                     case 8:
-                        return GameType.A;
+                        return ModoDeJuego.A;
                     case 9:
-                        return GameType.E;
+                        return ModoDeJuego.E;
                     default:
-                        Console.WriteLine("Invalid selection type one of the options");
+                        Console.WriteLine("La opcion ingresada no es valida, por favor seleccione un numero que corresponda a la lista");
                         break;
                 }
             }
@@ -125,32 +122,32 @@ namespace Lab1App.Presentation
         /// <summary>
         // Imprime los cartones a los usuarios correspondientes y los muestra en pantalla
         /// </summary>
-        /// <param name="player"></param>
-        public void PrintCardboard(Player player)
+        /// <param name="jugador"></param>
+        public void ImprimirCarton(Jugador jugador)
         {
-            BingoElement CurrentElement;
+            BingoRepo Elemento;
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    CurrentElement = player.CardBoardPlayer[i, j];
-                    if (CurrentElement.State)
+                    Elemento = jugador.CartonDelJugador[i, j];
+                    if (Elemento.Estado)
                     {
-                        string NewNumber = CurrentElement.Number.Substring(1, 2);
+                        string NuevaBolita = Elemento.NumeroBolita.Substring(1, 2);
 
-                        Console.Write(" {0} [X]", NewNumber);
+                        Console.Write(" {0} [X]", NuevaBolita);
                     }
                     else
                     {
-                        string ModifiedNumber = CurrentElement.Number;
-                        if (!ModifiedNumber.Equals(" XXXXXX"))
+                        string NumeroModificado = Elemento.NumeroBolita;
+                        if (!NumeroModificado.Equals(" XXXXXX"))
                         {
-                            if (ModifiedNumber.Substring(1, 2).Contains(" "))
+                            if (NumeroModificado.Substring(1, 2).Contains(" "))
                             {
-                                ModifiedNumber = " 0" + ModifiedNumber.Substring(1, 2) + "[ ]";
+                                NumeroModificado = " 0" + NumeroModificado.Substring(1, 2) + "[ ]";
                             }
                         }
-                        Console.Write(ModifiedNumber);
+                        Console.Write(NumeroModificado);
                     }
                 }
                 Console.WriteLine("");
@@ -159,27 +156,27 @@ namespace Lab1App.Presentation
 
         #endregion
 
-        #region Make TheMain Task
+        #region Ejecutar Tareas Principales
 
    // Muestra, el ganador del juego
-        public void ShowTheWinner(string PlayerName)
+        public void MostrarGanador(string NombreJugador)
         {
             Console.Clear();
             Console.WriteLine("======================================================");
-            Console.WriteLine("      Congratulations {0} you are the winner!!!", PlayerName);
+            Console.WriteLine("        Felicidades {0} es el ganador!!!", NombreJugador);
             Console.WriteLine("======================================================");
         }
 
        
-        public void PrintPlayersAndCardboard(List<Player> PlayersList)
+        public void ImprimirJugadoresYCartones(List<Jugador> ListaJugadores)
         {
-            foreach (var player in PlayersList)
+            foreach (var jugador in ListaJugadores)
             {
-                Console.WriteLine("\n{0}'s Cardboard:", player.Name);
-                PrintCardboard(player);
-                if (player.MarkedNumbers.Count != 0)
+                Console.WriteLine("\nCarton de {0}:", jugador.Nombre);
+                ImprimirCarton(jugador);
+                if (jugador.NumerosMarcados.Count != 0)
                 {
-                    PrintMarkedNumbers(player);
+                    ImprimirNumerosMarcados(jugador);
                 }
             }
             Console.WriteLine("\n\n");
@@ -188,33 +185,33 @@ namespace Lab1App.Presentation
         /// <resumen>
         // Metodo que muestra en pantalla los numeros marcados en cada carton
         /// </resumen>
-        /// <parametro1="player"></param>
-        public void PrintMarkedNumbers(Player player)
+        /// <parametro1="jugador"></param>
+        public void ImprimirNumerosMarcados(Jugador jugador)
         {
-            Console.WriteLine("\n{0}'s Lista de numeros marcados: {1}", player.Name, string.Join(",", player.MarkedNumbers));
+            Console.WriteLine("\n{0}'s Lista de numeros marcados: {1}", jugador.Nombre, string.Join(",", jugador.NumerosMarcados));
             Console.WriteLine("------------------------------------------------------------------");
         }
 
         /// <resumen>
          // Metodo que realiza seguimiento de los numeros que salieron y que cartones contiene dichos numeros
         /// </summary>
-        /// <parametro1="CurrentNumber"></param>
-        /// <parametro2="PlayersList"></param>
-        public void MarkNumber(int CurrentNumber, List<Player> PlayersList)
+        /// <parametro1="NumeroActual"></param>
+        /// <parametro2="ListaJugadores"></param>
+        public void MarcarNumeros(int NumeroActual, List<Jugador> ListaJugadores)
         {
-            foreach (var Player in PlayersList)
+            foreach (var jg in ListaJugadores)
             {
                 for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        if (!(Player.CardBoardPlayer[i, j].Number.Equals(" XXXXXX")))
+                        if (!(jg.CartonDelJugador[i, j].NumeroBolita.Equals(" XXXXXX")))
                         {
-                            if (Convert.ToInt32(Player.CardBoardPlayer[i, j].Number.Substring(1, 2)) == CurrentNumber)
+                            if (Convert.ToInt32(jg.CartonDelJugador[i, j].NumeroBolita.Substring(1, 2)) == NumeroActual)
                             {
-                                Player.CardBoardPlayer[i, j].State = true;
-                                Console.WriteLine("{0}'s number {1}:[{2}][{3}]", Player.Name, CurrentNumber, i + 1, j + 1);
-                                Player.MarkedNumbers.Add(CurrentNumber);
+                                jg.CartonDelJugador[i, j].Estado = true;
+                                Console.WriteLine("Numeros de {0} {1}:[{2}][{3}]", jg.Nombre, NumeroActual, i + 1, j + 1);
+                                jg.NumerosMarcados.Add(NumeroActual);
                             }
                         }
                     }
@@ -222,10 +219,10 @@ namespace Lab1App.Presentation
             }
         }
             // Metodo que muestra la lista de los numeros que salieron en el juego
-        public void ShowNumberList(List<int> NumberList)
+        public void MostrarListaNumerosFavorecidos(List<int> ListaNumeros)
         {
-            Console.WriteLine("List of the {0} number(s) played:", NumberList.Count);
-            Console.WriteLine("{0}", string.Join(",", NumberList));
+            Console.WriteLine("Lista de numeros {0} jugados:", ListaNumeros.Count);
+            Console.WriteLine("{0}", string.Join(",", ListaNumeros));
         }
 
         #endregion

@@ -1,11 +1,7 @@
 ﻿using Lab1App.GUI;
 using Lab1App.Models;
 using Lab1App.Utils;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WcfLab1.Domain.Services;
 
 namespace Lab1App.Application
@@ -27,36 +23,36 @@ namespace Lab1App.Application
         /// Metodo que pregunta por el numero de jugadores, sus datos y el modo de juego 
         /// </>
         /// <returns>cartones respectivos</returns>
-        public Game PrepareTheGame()
+        public Juego PrepararJuego()
         {
-            bingoGUI.GrettingsPropmt();
-            string[] playersNames = bingoGUI.GetPlayersNames();
-            List<Player> PlayerList = utils.CreatePlayer(playersNames);
-            bingoGUI.PrintPlayersAndCardboard(PlayerList);
-            return new Game(bingoGUI.SelectPlayMode(), PlayerList);
+            bingoGUI.MensajesDeBienvenida();
+            string[] nombreJugadores = bingoGUI.ObtenerNombresDeJugadores();
+            List<Jugador> listaJugadores = utils.CrearJugador(nombreJugadores);
+            bingoGUI.ImprimirJugadoresYCartones(listaJugadores);
+            return new Juego(bingoGUI.SeleccionarModoDeJuego(), listaJugadores);
         }
 
-        public string MakeTheMainTask(Game game)
+        public string PrepararTareaPrincipal(Juego juego)
         {
-            List<int> NumberList = new List<int>();
-            int CurrentNumber = 0;
-            bool BingoResult = false;
-            while (!BingoResult)
+            List<int> listaNumeros = new List<int>();
+            int NumeroActual = 0;
+            bool ResultadoBingo = false;
+            while (!ResultadoBingo)
             {
-                bingoGUI.PressEnterPropmt();
-                CurrentNumber = WFCBingo.GetNumber(NumberList);
-                NumberList.Add(CurrentNumber);
-                bingoGUI.ShowNumberList(NumberList);
-                foreach (var player in game.PlayerList)
+                bingoGUI.MensajeSacarBolita();
+                NumeroActual = WFCBingo.ObtenerNumero(listaNumeros);
+                listaNumeros.Add(NumeroActual);
+                bingoGUI.MostrarListaNumerosFavorecidos(listaNumeros);
+                foreach (var jg in juego.ListaJugadores)
                 {
-                    if (WFCBingo.GetWinner(game.GameMode, player.CardBoardPlayer))
+                    if (WFCBingo.ObtenerGanador(juego.ModoJuego, jg.CartonDelJugador))
                     {
-                        bingoGUI.PrintPlayersAndCardboard(game.PlayerList);
-                        return player.Name;
+                        bingoGUI.ImprimirJugadoresYCartones(juego.ListaJugadores);
+                        return jg.Nombre;
                     }
                 }
-                bingoGUI.MarkNumber(CurrentNumber, game.PlayerList);
-                bingoGUI.PrintPlayersAndCardboard(game.PlayerList);
+                bingoGUI.MarcarNumeros(NumeroActual, juego.ListaJugadores);
+                bingoGUI.ImprimirJugadoresYCartones(juego.ListaJugadores);
             }
             return null;
         }
@@ -64,16 +60,13 @@ namespace Lab1App.Application
         /// <resumen>
         /// Ejecuta la accion principal del juego
         /// </resumen>
-        public void PlayBingo()
+        public void JugarBingo()
         {
-            var game = PrepareTheGame();
-            bingoGUI.TimeToPlayPropmt();
-            bingoGUI.ShowTheWinner(MakeTheMainTask(game));
-            bingoGUI.GoodbyePropmt();
+            var juego = PrepararJuego();
+            bingoGUI.MensajeDeInicioDeJuego();
+            bingoGUI.MostrarGanador(PrepararTareaPrincipal(juego));
+            bingoGUI.MensajeDespedida();
         }
-
-
-
 
     }
 }

@@ -12,31 +12,31 @@ namespace Lab1App.Utils
     {
     
        // Metodo que crea la lista de jugadores, sus datos y su respectivo carton de juego
-        public List<Player> CreatePlayer(string[] PlayersNames)
+        public List<Jugador> CrearJugador(string[] NombreJugadores)
         {
-            List<Player> PlayersList = new List<Player>();
-            for (int i = 0; i < PlayersNames.Length; i++)
+            List<Jugador> ListaJugadores = new List<Jugador>();
+            for (int i = 0; i < NombreJugadores.Length; i++)
             {
-                Player NewPlayer = new Player();
-                NewPlayer.ID = i + 1;
-                NewPlayer.Name = PlayersNames[i];
-                NewPlayer.CardBoardPlayer = InitializeCardboard(NewPlayer.CardBoardPlayer);
-                PlayersList.Add(NewPlayer);
+                Jugador NuevoJugador = new Jugador();
+                NuevoJugador.ID = i + 1;
+                NuevoJugador.Nombre = NombreJugadores[i];
+                NuevoJugador.CartonDelJugador = InicializarCarton(NuevoJugador.CartonDelJugador);
+                ListaJugadores.Add(NuevoJugador);
             }
-            return PlayersList;
+            return ListaJugadores;
         }
         
         // Metodo que asigna cada letra de la palabra bingo a una columna en especifico
-        public BingoElement[,] InitializeCardboard(BingoElement[,] m)
+        public BingoRepo[,] InicializarCarton(BingoRepo[,] m)
         {
-            char[] Columns = new char[]
+            char[] cols = new char[]
             {
                 'B','I','N','G','O'
             };
 
-            for (int i = 0; i < Columns.Length; i++)
+            for (int i = 0; i < cols.Length; i++)
             {
-                FillColumn(Columns[i], m);
+                LlenarColumnas(cols[i], m);
             }
 
             return m;
@@ -48,69 +48,69 @@ namespace Lab1App.Utils
         /// <parametro1="CurrentColumn"></param>
         /// <parametro2="m"></param>
         /// <returns></returns>
-        public BingoElement[,] FillColumn(char CurrentColumn, BingoElement[,] m)
+        public BingoRepo[,] LlenarColumnas(char ColumnaActual, BingoRepo[,] m)
         {
-            int ColumnIndex = 0;
-            int FistNumber = 0;
-            int LastNumber = 0;
+            int IndiceColumna = 0;
+            int PrimerNumero = 0;
+            int UltimoNumero = 0;
 
-            switch (CurrentColumn)
+            switch (ColumnaActual)
             {
                 case 'B':
-                    ColumnIndex = 0;
-                    FistNumber = 1;
-                    LastNumber = 15;
+                    IndiceColumna = 0;
+                    PrimerNumero = 1;
+                    UltimoNumero = 15;
                     break;
                 case 'I':
-                    ColumnIndex = 1;
-                    FistNumber = 16;
-                    LastNumber = 30;
+                    IndiceColumna = 1;
+                    PrimerNumero = 16;
+                    UltimoNumero = 30;
                     break;
                 case 'N':
-                    ColumnIndex = 2;
-                    FistNumber = 31;
-                    LastNumber = 45;
+                    IndiceColumna = 2;
+                    PrimerNumero = 31;
+                    UltimoNumero = 45;
                     break;
                 case 'G':
-                    ColumnIndex = 3;
-                    FistNumber = 46;
-                    LastNumber = 60;
+                    IndiceColumna = 3;
+                    PrimerNumero = 46;
+                    UltimoNumero = 60;
                     break;
                 case 'O':
-                    ColumnIndex = 4;
-                    FistNumber = 61;
-                    LastNumber = 75;
+                    IndiceColumna = 4;
+                    PrimerNumero = 61;
+                    UltimoNumero = 75;
                     break;
                 default:
                     return null;
             }
 
-            List<int> SelectedNumbers = new List<int>();
+            List<int> NumerosSeleccionados = new List<int>();
 
             for (int i = 0; i < 5; i++)
             {
-                if (CurrentColumn == 'N' && i == 2)
+                if (ColumnaActual == 'N' && i == 2)
                 {
-                    m[i, ColumnIndex] = new BingoElement(" XXXXXX", false);
+                    m[i, IndiceColumna] = new BingoRepo(" XXXXXX", false);
                 }
                 else
                 {
-                    int CurrentNumber = CalculateNumber(FistNumber, LastNumber);
-                    while (SelectedNumbers.Contains(CurrentNumber))
+                    int NumeroActual = CalcularNumero(PrimerNumero, UltimoNumero);
+                    while (NumerosSeleccionados.Contains(NumeroActual))
                     {
-                        CurrentNumber = CalculateNumber(FistNumber, LastNumber);
+                        NumeroActual = CalcularNumero(PrimerNumero, UltimoNumero);
                     }
-                    SelectedNumbers.Add(CurrentNumber);
-                    m[i, ColumnIndex] = new BingoElement(" " + CurrentNumber + " [ ]", false);
+                    NumerosSeleccionados.Add(NumeroActual);
+                    m[i, IndiceColumna] = new BingoRepo(" " + NumeroActual + " [ ]", false);
                 }
             }
             return m;
         }
 
-        public int CalculateNumber(int FistNumber, int LastNumber)
+        public int CalcularNumero(int PrimerNumero, int UltimoNumero)
         {
             Random rnd = new Random();
-            return rnd.Next(FistNumber, LastNumber + 1);
+            return rnd.Next(PrimerNumero, UltimoNumero + 1);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WcfLab1.Domain.Respositories;
 using WcfLab1.Domain.Services;
 
@@ -14,25 +12,25 @@ namespace WcfLab1.Domain.Actions
         /// </resumen>
         /// <parametro1="CurrentNumber"></param>
         /// <returns></returns>
-        public string GetBingoColumnLetter(int CurrentNumber)
+        public string ObtenerLetraDeColumnaBingo(int NumeroActual)
         {
-            if (CurrentNumber >= 1 && CurrentNumber <= 15)
+            if (NumeroActual >= 1 && NumeroActual <= 15)
             {
                 return "B";
             }
-            else if (CurrentNumber >= 16 && CurrentNumber <= 30)
+            else if (NumeroActual >= 16 && NumeroActual <= 30)
             {
                 return "I";
             }
-            else if (CurrentNumber >= 31 && CurrentNumber <= 45)
+            else if (NumeroActual >= 31 && NumeroActual <= 45)
             {
                 return "N";
             }
-            else if (CurrentNumber >= 46 && CurrentNumber <= 60)
+            else if (NumeroActual >= 46 && NumeroActual <= 60)
             {
                 return "G";
             }
-            else if (CurrentNumber >= 61 && CurrentNumber <= 75)
+            else if (NumeroActual >= 61 && NumeroActual <= 75)
             {
                 return "O";
             }
@@ -44,16 +42,16 @@ namespace WcfLab1.Domain.Actions
         /// <nombre del parametro="m"></param>
         /// retorna m
 
-        public BingoElement[,] InitializeCardboard(BingoElement[,] m)
+        public BingoRepo[,] InicializarCarton(BingoRepo[,] m)
         {
-            char[] Columns = new char[]
+            char[] cols = new char[]
             {
                 'B','I','N','G','O'
             };
 
-            for (int i = 0; i < Columns.Length; i++)
+            for (int i = 0; i < cols.Length; i++)
             {
-                FillColumn(Columns[i], m);
+                FillColumn(cols[i], m);
             }
 
             return m;
@@ -62,63 +60,63 @@ namespace WcfLab1.Domain.Actions
         /// <resumen>
         /// LLena cada columna con su respectivo valor
         /// </resumen>
-        /// <nombre del parametro 1="CurrentColumn"></param>
+        /// <nombre del parametro 1="ColumnaActual"></param>
         /// <parametro2="m"></param>
         /// <returns></returns>
-        public BingoElement[,] FillColumn(char CurrentColumn, BingoElement[,] m)
+        public BingoRepo[,] FillColumn(char ColumnaActual, BingoRepo[,] m)
         {
-            int ColumnIndex = 0;
-            int FistNumber = 0;
-            int LastNumber = 0;
+            int IndiceColumna = 0;
+            int PrimerNumero = 0;
+            int UltimoNumero = 0;
 
-            switch (CurrentColumn)
+            switch (ColumnaActual)
             {
                 case 'B':
-                    ColumnIndex = 0;
-                    FistNumber = 1;
-                    LastNumber = 15;
+                    IndiceColumna = 0;
+                    PrimerNumero = 1;
+                    UltimoNumero = 15;
                     break;
                 case 'I':
-                    ColumnIndex = 1;
-                    FistNumber = 16;
-                    LastNumber = 30;
+                    IndiceColumna = 1;
+                    PrimerNumero = 16;
+                    UltimoNumero = 30;
                     break;
                 case 'N':
-                    ColumnIndex = 2;
-                    FistNumber = 31;
-                    LastNumber = 45;
+                    IndiceColumna = 2;
+                    PrimerNumero = 31;
+                    UltimoNumero = 45;
                     break;
                 case 'G':
-                    ColumnIndex = 3;
-                    FistNumber = 46;
-                    LastNumber = 60;
+                    IndiceColumna = 3;
+                    PrimerNumero = 46;
+                    UltimoNumero = 60;
                     break;
                 case 'O':
-                    ColumnIndex = 4;
-                    FistNumber = 61;
-                    LastNumber = 75;
+                    IndiceColumna = 4;
+                    PrimerNumero = 61;
+                    UltimoNumero = 75;
                     break;
                 default:
                     return null;
             }
 
-            List<int> SelectedNumbers = new List<int>();
+            List<int> NumerosFavorecidos = new List<int>();
 
             for (int i = 0; i < 5; i++)
             {
-                if (CurrentColumn == 'N' && i == 2)
+                if (ColumnaActual == 'N' && i == 2)
                 {
-                    m[i, ColumnIndex] = new BingoElement(" XXXXXX", false);
+                    m[i, IndiceColumna] = new BingoRepo(" XXXXXX", false);
                 }
                 else
                 {
-                    int CurrentNumber = CalculateNumber(FistNumber, LastNumber);
-                    while (SelectedNumbers.Contains(CurrentNumber))
+                    int NumeroActual = CalcularNumero(PrimerNumero, UltimoNumero);
+                    while (NumerosFavorecidos.Contains(NumeroActual))
                     {
-                        CurrentNumber = CalculateNumber(FistNumber, LastNumber);
+                        NumeroActual = CalcularNumero(PrimerNumero, UltimoNumero);
                     }
-                    SelectedNumbers.Add(CurrentNumber);
-                    m[i, ColumnIndex] = new BingoElement(" " + CurrentNumber + " [ ]", false);
+                    NumerosFavorecidos.Add(NumeroActual);
+                    m[i, IndiceColumna] = new BingoRepo(" " + NumeroActual + " [ ]", false);
                 }
             }
             return m;
@@ -127,37 +125,37 @@ namespace WcfLab1.Domain.Actions
         /// <resumen>
         /// calcula  numeros aleatorios dentro del rango especifico
         /// </resumen>
-        /// <parametro1="FistNumber"></param>
-        /// <parametro2="LastNumber"></param>
+        /// <parametro1="PrimerNumero"></param>
+        /// <parametro2="UltimoNumero"></param>
         /// retorna el respectivo numero
-        public int CalculateNumber(int FistNumber, int LastNumber)
+        public int CalcularNumero(int PrimerNumero, int UltimoNumero)
         {
             Random rnd = new Random();
-            return rnd.Next(FistNumber, LastNumber + 1);
+            return rnd.Next(PrimerNumero, UltimoNumero + 1);
         }
 
-        public string[,] GetWinnerPattern(GameType gameType)
+        public string[,] ObtenerPatronGanador(ModoDeJuego modoJuego)
         {
-            switch (gameType)
+            switch (modoJuego)
             {
-                case GameType.Full:
-                    return patternFull();
-                case GameType.FourCorners:
-                    return pattern4Corners();
-                case GameType.H:
-                    return patternH();
-                case GameType.X:
-                    return patternX();
-                case GameType.O:
-                    return patternO();
-                case GameType.U:
-                    return patternU();
-                case GameType.P:
-                    return patternP();
-                case GameType.A:
-                    return patternA();
-                case GameType.E:
-                    return patternE();
+                case ModoDeJuego.CartonLleno:
+                    return LLenarPatron();
+                case ModoDeJuego.CuatroEsquinas:
+                    return patronCuatroEsquinas();
+                case ModoDeJuego.H:
+                    return patronH();
+                case ModoDeJuego.X:
+                    return patronX();
+                case ModoDeJuego.O:
+                    return patronO();
+                case ModoDeJuego.U:
+                    return patronU();
+                case ModoDeJuego.P:
+                    return patronP();
+                case ModoDeJuego.A:
+                    return patronA();
+                case ModoDeJuego.E:
+                    return patronE();
                 default:
                     return null;
             }
@@ -166,64 +164,64 @@ namespace WcfLab1.Domain.Actions
         /// <resumen>
         /// Conteo de elementos dentro de la matriz de numeros
         /// </resumen>
-        /// <parametro 1="element"></param>
-        /// <parametro 2="ElementList"></param>
+        /// <parametro 1="elemento"></param>
+        /// <parametro 2="ListaElementos"></param>
         /// <returns></returns>
-        public int CountOfElement(string element, string[,] ElementList)
+        public int ConteoDeElementos(string elemento, string[,] ListaElementos)
         {
-            int NumElement = 0;
+            int elNum = 0;
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (ElementList[i, j] != null)
+                    if (ListaElementos[i, j] != null)
                     {
-                        if (ElementList[i, j].Equals(element))
+                        if (ListaElementos[i, j].Equals(elemento))
                         {
-                            NumElement++;
+                            elNum++;
                         }
                     }
                 }
             }
-            return NumElement;
+            return elNum;
         }
 
         /// <summary>
-        /// Obtener el ganador de un juego en espec[ifico
+        /// Obtener el ganador de un juego en especifico
         /// </summary>
-        /// <parametro1="WinnerPattern"></param>
-        /// <parametro2  ="PlayersList"></param>
+        /// <parametro1="PatronGanador"></param>
+        /// <parametro2  ="cartonDeJugador"></param>
         /// <returns>gano o perdio</returns>
-        public bool GetTheWinner(string[,] WinnerPattern, BingoElement[,] cardBoardPlayer)
+        public bool ObtenerGanador(string[,] PatronGanador, BingoRepo[,] cartonDeJugador)
         {
-            int xPattern = -1;
-            int xPlayer = 0;
+            int xPatron = -1;
+            int xJugador = 0;
             for (int f = 0; f < 5; f++)
             {
                 for (int c = 0; c < 5; c++)
                 {
-                    if (WinnerPattern[f, c] != null)
+                    if (PatronGanador[f, c] != null)
                     {
-                        xPattern++;
-                        if (cardBoardPlayer[f, c].State == true)
-                            xPlayer++;
+                        xPatron++;
+                        if (cartonDeJugador[f, c].Estado == true)
+                            xJugador++;
                     }
                 }
             }
-            if (xPattern == xPlayer)
+            if (xPatron == xJugador)
             {
                 return true;
             }
             return false;
         }
 
-        #region Patterns
+        #region Patrones
 
         /// <resumen>
         /// Metodo para juego de carton lleno
         /// </resumen>
         /// <returns>carton listo para jugar</returns>
-        public string[,] patternFull()
+        public string[,] LLenarPatron()
         {
             string[,] patron = new string[5, 5];
             for (int f = 0; f < 5; f++)
@@ -241,7 +239,7 @@ namespace WcfLab1.Domain.Actions
         /// Metodo para juego 4 esquinas
         /// </resumen>
         /// <returns>carton listo para jugar</returns>
-        public string[,] pattern4Corners()
+        public string[,] patronCuatroEsquinas()
         {
             string[,] patron = new string[5, 5];
             patron[0, 0] = "X"; patron[0, 4] = "X";
@@ -254,7 +252,7 @@ namespace WcfLab1.Domain.Actions
         /// Metodo para jugar letra H
         /// </summary>
         /// <returns>Carton listo para jugar</returns>
-        public string[,] patternH()
+        public string[,] patronH()
         {
             string[,] patron = new string[5, 5];
             for (int f = 0; f < 5; f++)
@@ -278,7 +276,7 @@ namespace WcfLab1.Domain.Actions
         /// Metodo para juego de Letra X
         /// </resumen>
         /// <returns>Carton listo para jugar</returns>
-        public string[,] patternX()
+        public string[,] patronX()
         {
             string[,] patron = new string[5, 5];
             patron[0, 0] = "X"; patron[0, 4] = "X";
@@ -290,10 +288,10 @@ namespace WcfLab1.Domain.Actions
         }
 
         /// <resumen>
-        /// 
+        /// Metodo para juego de Letra O
         /// </resumen>
         /// <returns>patron listo para jugar</returns>
-        public string[,] patternO()
+        public string[,] patronO()
         {
             string[,] patron = new string[5, 5];
             for (int f = 0; f < 5; f++)
@@ -317,10 +315,10 @@ namespace WcfLab1.Domain.Actions
         }
 
         /// <resumen>
-        /// Metodo para jugar Letra O
+        /// Metodo para jugar Letra U
         /// </resumen>
         /// <returns>Carton listo para jugar</returns>
-        public string[,] patternU()
+        public string[,] patronU()
         {
             string[,] patron = new string[5, 5];
             for (int f = 0; f < 5; f++)
@@ -347,7 +345,7 @@ namespace WcfLab1.Domain.Actions
         /// Metodo para jugar Letra P
         /// </resumen>
         /// <returns>Carton listo para jugar</returns>
-        public string[,] patternP()
+        public string[,] patronP()
         {
             string[,] patron = new string[5, 5];
             for (int c = 0; c < 3; c++)
@@ -376,7 +374,7 @@ namespace WcfLab1.Domain.Actions
         /// Metodo para jugar Letra A
         /// </resumen>
         /// <returns>Carton listo para jugar</returns>
-        public string[,] patternA()
+        public string[,] patronA()
         {
             string[,] patron = new string[5, 5];
             patron[0, 2] = "X";
@@ -403,7 +401,7 @@ namespace WcfLab1.Domain.Actions
         /// Metodo para jugar Letra E
         /// </resumen>
         /// <returns>Carton Listo para jugar</returns>
-        public string[,] patternE()
+        public string[,] patronE()
         {
             string[,] patron = new string[5, 5];
             patron[0, 2] = "X";

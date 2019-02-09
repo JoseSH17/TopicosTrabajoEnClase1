@@ -1,26 +1,22 @@
 ﻿using Lab1App.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WcfLab1.Domain.Services;
 
 namespace Lab1App.GUI
 {
     public interface IBingoGUI
     {
-        string[] GetPlayersNames();
-        GameType SelectPlayMode();
-        void PrintPlayersAndCardboard(List<Player> PlayersList);
-        void PrintCardboard(Player player);
-        void MarkNumber(int CurrentNumber, List<Player> PlayersList);
-        void PrintMarkedNumbers(Player player);
-        void ShowNumberList(List<int> NumberList);
-        void ShowTheWinner(string PlayerName);
-        void GrettingsPropmt();
-        void GoodbyePropmt();
-        void TimeToPlayPropmt();
-        void PressEnterPropmt();
+        string[] ObtenerNombresDeJugadores();
+        ModoDeJuego SeleccionarModoDeJuego();
+        void ImprimirJugadoresYCartones(List<Jugador> ListaJugadores);
+        void ImprimirCarton(Jugador jugador);
+        void MarcarNumeros(int CurrentNumber, List<Jugador> ListaJugadores);
+        void ImprimirNumerosMarcados(Jugador player);
+        void MostrarListaNumerosFavorecidos(List<int> ListaNumeros);
+        void MostrarGanador(string NombreJugador);
+        void MensajesDeBienvenida();
+        void MensajeDespedida();
+        void MensajeDeInicioDeJuego();
+        void MensajeSacarBolita();
     }
 }

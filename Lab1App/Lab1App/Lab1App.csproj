@@ -55,8 +55,8 @@
     <Compile Include="GUI\BingoGUI.cs" />
     <Compile Include="Core\Program.cs" />
     <Compile Include="GUI\IBingoGUI.cs" />
-    <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Juego.cs" />
+    <Compile Include="Models\Jugador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\IBingoUtils.cs" />
     <Compile Include="Utils\BingoUtils.cs" />

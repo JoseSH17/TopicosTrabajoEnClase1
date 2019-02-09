@@ -61,18 +61,18 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Domain\Services\Bingo.svc" />
+    <Content Include="Logica\Servicios\Bingo.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Actions\Bingo.cs" />
-    <Compile Include="Domain\Respositories\BingoElement.cs" />
-    <Compile Include="Domain\Services\Bingo.svc.cs">
+    <Compile Include="Logica\Acciones\Bingo.cs" />
+    <Compile Include="Logica\Respositorios\ElementoBingo.cs" />
+    <Compile Include="Logica\Servicios\Bingo.svc.cs">
       <DependentUpon>Bingo.svc</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Interfaces\IBingo.cs" />
-    <Compile Include="Domain\Specification\Bingo.cs" />
-    <Compile Include="Domain\Validations\Bingo.cs" />
+    <Compile Include="Logica\Interfaces\IBingo.cs" />
+    <Compile Include="Logica\Especificaciones\Bingo.cs" />
+    <Compile Include="Logica\Validaciones\Bingo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
