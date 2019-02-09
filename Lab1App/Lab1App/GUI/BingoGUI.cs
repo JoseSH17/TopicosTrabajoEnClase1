@@ -86,10 +86,10 @@ namespace Lab1App.Presentation
                 Console.WriteLine("3) Formar H");
                 Console.WriteLine("4) Formar X");
                 Console.WriteLine("5) Formar O");
-                Console.WriteLine("6) Formar U");
-                Console.WriteLine("7) Formar P");
-                Console.WriteLine("8) Formar A");
-                Console.WriteLine("9) Formar E");
+                //Console.WriteLine("6) Formar U");
+                //Console.WriteLine("7) Formar P");
+                //Console.WriteLine("8) Formar A");
+                //Console.WriteLine("9) Formar E");
                 int Resp = int.Parse(Console.ReadLine());
 
                 switch (Resp)
@@ -104,14 +104,14 @@ namespace Lab1App.Presentation
                         return ModoDeJuego.X;
                     case 5:
                         return ModoDeJuego.O;
-                    case 6:
-                        return ModoDeJuego.U;
-                    case 7:
-                        return ModoDeJuego.P;
-                    case 8:
-                        return ModoDeJuego.A;
-                    case 9:
-                        return ModoDeJuego.E;
+                    //case 6:
+                    //    return ModoDeJuego.U;
+                    //case 7:
+                    //    return ModoDeJuego.P;
+                    //case 8:
+                    //    return ModoDeJuego.A;
+                    //case 9:
+                    //    return ModoDeJuego.E;
                     default:
                         Console.WriteLine("La opcion ingresada no es valida, por favor seleccione un numero que corresponda a la lista");
                         break;
