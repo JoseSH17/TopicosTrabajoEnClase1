@@ -23,10 +23,10 @@ namespace Lab1App.Application
             this.WFCBingo = _WFCBingo;
         }
 
-        /// <summary>
-        /// Ask for the Number of players and their data and a game mode
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo que pregunta por el numero de jugadores, sus datos y el modo de juego 
+        /// </>
+        /// <returns>cartones respectivos</returns>
         public Game PrepareTheGame()
         {
             bingoGUI.GrettingsPropmt();
@@ -61,9 +61,9 @@ namespace Lab1App.Application
             return null;
         }
 
-        /// <summary>
-        /// Execute the main action
-        /// </summary>
+        /// <resumen>
+        /// Ejecuta la accion principal del juego
+        /// </resumen>
         public void PlayBingo()
         {
             var game = PrepareTheGame();
