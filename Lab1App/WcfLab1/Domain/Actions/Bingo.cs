@@ -38,12 +38,12 @@ namespace WcfLab1.Domain.Actions
             }
             return String.Empty;
         }
+        /// <resumen>
+        /// Rellena toda la matriz con los numeros
+        /// </resumen>
+        /// <nombre del parametro="m"></param>
+        /// retorna m
 
-        /// <summary>
-        /// Fill all the matrix with the numbers
-        /// </summary>
-        /// <param name="m"></param>
-        /// <returns></returns>
         public BingoElement[,] InitializeCardboard(BingoElement[,] m)
         {
             char[] Columns = new char[]
@@ -59,11 +59,11 @@ namespace WcfLab1.Domain.Actions
             return m;
         }
 
-        /// <summary>
-        /// Fill each column with the value 
-        /// </summary>
-        /// <param name="CurrentColumn"></param>
-        /// <param name="m"></param>
+        /// <resumen>
+        /// LLena cada columna con su respectivo valor
+        /// </resumen>
+        /// <nombre del parametro 1="CurrentColumn"></param>
+        /// <parametro2="m"></param>
         /// <returns></returns>
         public BingoElement[,] FillColumn(char CurrentColumn, BingoElement[,] m)
         {
@@ -124,12 +124,12 @@ namespace WcfLab1.Domain.Actions
             return m;
         }
 
-        /// <summary>
-        /// Ony Get a random number that its inside of this range
-        /// </summary>
-        /// <param name="FistNumber"></param>
-        /// <param name="LastNumber"></param>
-        /// <returns></returns>
+        /// <resumen>
+        /// Obtiene un numero aleatorio dentro del rango especifico
+        /// </resumen>
+        /// <parametro1="FistNumber"></param>
+        /// <parametro2="LastNumber"></param>
+        /// retorna el respectivo numero
         public int CalculateNumber(int FistNumber, int LastNumber)
         {
             Random rnd = new Random();
@@ -163,11 +163,11 @@ namespace WcfLab1.Domain.Actions
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="ElementList"></param>
+        /// <resumen>
+        /// Conteo de numeros para cada
+        /// </resumen>
+        /// <parametro 1="element"></param>
+        /// <parametro 2="ElementList"></param>
         /// <returns></returns>
         public int CountOfElement(string element, string[,] ElementList)
         {
