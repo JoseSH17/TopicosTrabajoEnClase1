@@ -8,27 +8,29 @@ using WcfLab1.Domain.Respositories;
 
 namespace WcfLab1.Domain.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Bingo" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Bingo.svc or Bingo.svc.cs at the Solution Explorer and start debugging.
+    
     public class Bingo : IBingo
     {
+    
+    
         private WcfLab1.Domain.Specification.Bingo Specification { get; set; }
 
+       // Matriz de Cartones
         public Bingo()
         {
             this.Specification = new WcfLab1.Domain.Specification.Bingo();
         }
-
+     // Obtiene los numeros aleatorios entre 1 y 75 para llenar el cart[on
         public int GetNumber(List<int> NumberList)
         {
             return Specification.GetNumber(NumberList);
         }
-
+        // Verifica el ganador
         public bool GetWinner(GameType GameType, BingoElement[,] BingoCardBoard)
         {
             return Specification.CheckWinner(GameType, BingoCardBoard);
         }
-
+        // Asgina una letra de la palabra BINGO a una columna especifica
         public string ColumnLetter(int CurrentNumber)
         {
             return Specification.GetColumnLetter(CurrentNumber);
