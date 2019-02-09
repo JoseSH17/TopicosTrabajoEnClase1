@@ -9,10 +9,10 @@ namespace WcfLab1.Domain.Actions
 {
     public class Bingo
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="CurrentNumber"></param>
+        /// <resumen>
+        /// Metodo que genera cada letra de la palabra bingo en su respectiva columna
+        /// </resumen>
+        /// <parametro1="CurrentNumber"></param>
         /// <returns></returns>
         public string GetBingoColumnLetter(int CurrentNumber)
         {
@@ -125,7 +125,7 @@ namespace WcfLab1.Domain.Actions
         }
 
         /// <resumen>
-        /// Obtiene un numero aleatorio dentro del rango especifico
+        /// calcula  numeros aleatorios dentro del rango especifico
         /// </resumen>
         /// <parametro1="FistNumber"></param>
         /// <parametro2="LastNumber"></param>
@@ -164,7 +164,7 @@ namespace WcfLab1.Domain.Actions
         }
 
         /// <resumen>
-        /// Conteo de numeros para cada
+        /// Conteo de elementos dentro de la matriz de numeros
         /// </resumen>
         /// <parametro 1="element"></param>
         /// <parametro 2="ElementList"></param>
@@ -189,11 +189,11 @@ namespace WcfLab1.Domain.Actions
         }
 
         /// <summary>
-        /// 
+        /// Obtener el ganador de un juego en espec[ifico
         /// </summary>
-        /// <param name="WinnerPattern"></param>
-        /// <param name="PlayersList"></param>
-        /// <returns></returns>
+        /// <parametro1="WinnerPattern"></param>
+        /// <parametro2  ="PlayersList"></param>
+        /// <returns>gano o perdio</returns>
         public bool GetTheWinner(string[,] WinnerPattern, BingoElement[,] cardBoardPlayer)
         {
             int xPattern = -1;
@@ -219,10 +219,10 @@ namespace WcfLab1.Domain.Actions
 
         #region Patterns
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para juego de carton lleno
+        /// </resumen>
+        /// <returns>carton listo para jugar</returns>
         public string[,] patternFull()
         {
             string[,] patron = new string[5, 5];
@@ -237,10 +237,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para juego 4 esquinas
+        /// </resumen>
+        /// <returns>carton listo para jugar</returns>
         public string[,] pattern4Corners()
         {
             string[,] patron = new string[5, 5];
@@ -251,9 +251,9 @@ namespace WcfLab1.Domain.Actions
         }
 
         /// <summary>
-        /// 
+        /// Metodo para jugar letra H
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Carton listo para jugar</returns>
         public string[,] patternH()
         {
             string[,] patron = new string[5, 5];
@@ -274,10 +274,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para juego de Letra X
+        /// </resumen>
+        /// <returns>Carton listo para jugar</returns>
         public string[,] patternX()
         {
             string[,] patron = new string[5, 5];
@@ -289,10 +289,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
+        /// <resumen>
         /// 
-        /// </summary>
-        /// <returns></returns>
+        /// </resumen>
+        /// <returns>patron listo para jugar</returns>
         public string[,] patternO()
         {
             string[,] patron = new string[5, 5];
@@ -316,10 +316,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para jugar Letra O
+        /// </resumen>
+        /// <returns>Carton listo para jugar</returns>
         public string[,] patternU()
         {
             string[,] patron = new string[5, 5];
@@ -343,10 +343,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para jugar Letra P
+        /// </resumen>
+        /// <returns>Carton listo para jugar</returns>
         public string[,] patternP()
         {
             string[,] patron = new string[5, 5];
@@ -372,10 +372,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para jugar Letra A
+        /// </resumen>
+        /// <returns>Carton listo para jugar</returns>
         public string[,] patternA()
         {
             string[,] patron = new string[5, 5];
@@ -399,10 +399,10 @@ namespace WcfLab1.Domain.Actions
             return patron;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <resumen>
+        /// Metodo para jugar Letra E
+        /// </resumen>
+        /// <returns>Carton Listo para jugar</returns>
         public string[,] patternE()
         {
             string[,] patron = new string[5, 5];
