@@ -10,6 +10,8 @@ namespace Lab1App.Utils
 {
     public class BingoUtils : IBingoUtils
     {
+    
+       // Metodo que crea la lista de jugadores, sus datos y su respectivo carton de juego
         public List<Player> CreatePlayer(string[] PlayersNames)
         {
             List<Player> PlayersList = new List<Player>();
@@ -23,7 +25,8 @@ namespace Lab1App.Utils
             }
             return PlayersList;
         }
-
+        
+        // Metodo que asigna cada letra de la palabra bingo a una columna en especifico
         public BingoElement[,] InitializeCardboard(BingoElement[,] m)
         {
             char[] Columns = new char[]
@@ -39,11 +42,11 @@ namespace Lab1App.Utils
             return m;
         }
 
-        /// <summary>
-        /// Fill each column with the value 
-        /// </summary>
-        /// <param name="CurrentColumn"></param>
-        /// <param name="m"></param>
+        /// <resumen>
+        /// LLena cada columna con un valor en especifico 
+        /// </resumen>
+        /// <parametro1="CurrentColumn"></param>
+        /// <parametro2="m"></param>
         /// <returns></returns>
         public BingoElement[,] FillColumn(char CurrentColumn, BingoElement[,] m)
         {
